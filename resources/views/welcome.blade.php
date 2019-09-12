@@ -99,5 +99,97 @@ for ($k = 1 ; $k < 20 ; $k++) {
                 </div>
             </div>
         </div>
+        <hr />
+
+        <p><strong>Создаем сиды</strong></p>
+
+        <pre><code>php artisan make:seeder UsersTableSeeder
+</code></pre>
+
+        <hr />
+
+        <p><strong>column DB types</strong> <a href="https://laravel.com/docs/5.0/schema">link docs</a></p>
+
+        <hr />
+
+        <h5 id="unsigned">unsigned</h5>
+
+        <p>от нуля и выше</p>
+
+        <hr />
+
+        <p><strong>nullable</strong> - допускает значение NULL - поле можно не заполнять</p>
+
+        <hr />
+
+        <p><code>--create=</code> указание того, что нужно создать новую таблицу ,а не добавить в существующую
+            <code>--table=</code></p>
+
+        <hr />
+
+        <p><strong>make model</strong></p>
+
+        <p><code>php artisan make:model Flight</code></p>
+
+        <p><em>create model with migration</em></p>
+
+        <p><code>php artisan make:model Flight --migration</code></p>
+
+        <p>or</p>
+
+        <p><code>php artisan make:model Flight --migration</code></p>
+
+        <p><em>example</em>
+            <code>php artisan make:model Models/BlogCategory -m</code> </p>
+
+        <h2 id="supmodelsblog_categorysup"><sup>создается папка Models и миграция blog_category</sup></h2>
+
+        <h5 id="createdb">create db</h5>
+
+        <pre><code class="mysql language-mysql">CREATE SCHEMA `laratest` DEFAULT CHARACTER SET utf8mb4 ;
+</code></pre>
+
+        <p><strong>Laravel uses the utf8mb4</strong></p>
+
+        <pre><code class="mysql language-mysql">CREATE SCHEMA `laravel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</code></pre>
+
+        <hr />
+
+        <p><strong>laravel-debugbar</strong>
+            //https://github.com/barryvdh/laravel-debugbar</p>
+
+        <p>//composer require barryvdh/laravel-debugbar --dev</p>
+
+        <hr />
+
+        <blockquote>
+            <p><strong>laravel plugin</strong>  ==> with "Laravel IDE Helper Generator"</p>
+        </blockquote>
+
+        <p>//<code>composer json</code>:
+            //add "require-dev": { "barryvdh/laravel-ide-helper": "^2.6",</p>
+
+        <p>//add in section "scripts"  info from man..</p>
+
+        <p>//<a href="https://github.com/barryvdh/laravel-ide-helper">https://github.com/barryvdh/laravel-ide-helper</a></p>
+
+        <p>//php artisan ide-helper:generate</p>
+
+        <p>//add to gitignore -> <em>ide</em>helper.php  /  .phpstorm.meta.php</p>
+
+        <hr />
+
+        <p>//система аунтификации
+            php artisan make:auth</p>
+
+        <hr />
+
+        <pre><code class="bash language-bash"> sudo chmod -R 777  storage &amp;&amp; chmod -R 777 bootstarp/cache
+</code></pre>
+
+        <hr />
+
+        <p>[]: https://laravel.com/docs/5.0/schema</p>
     </body>
 </html>
