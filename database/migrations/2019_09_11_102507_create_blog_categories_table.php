@@ -19,7 +19,6 @@ class CreateBlogCategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('discription')->nullable();
-
             $table->timestamps(); //Adds created_at and updated_at columns
             $table->softDeletes(); //метка когда запись была удалена, на самом деле запись не удаляется
         });
