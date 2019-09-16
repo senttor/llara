@@ -73,6 +73,7 @@ for ($k = 1 ; $k < 20 ; $k++) {
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -89,7 +90,9 @@ for ($k = 1 ; $k < 20 ; $k++) {
                 <div class="title m-b-md">
                     Test project on Laravel
                 </div>
-
+                <div id="app">
+                    <welcome></welcome>
+                </div>
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -97,6 +100,8 @@ for ($k = 1 ; $k < 20 ; $k++) {
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+
+
             </div>
         </div>
         <hr />

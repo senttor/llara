@@ -20,7 +20,9 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
 //http://xxxx.com/blog/posts  => resources/views/blog/posts/index.blade.php
 Route::resource('rest', 'RestTestController')->names('restTest');
 
-
+/*Route::resource('/cruds', 'CrudsController', [
+    'except' => ['edit', 'show', 'store']
+]);*/
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
