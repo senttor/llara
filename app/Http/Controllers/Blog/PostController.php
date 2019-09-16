@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class RestTestController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,10 +14,7 @@ class RestTestController extends Controller
      */
     public function index()
     {
-       // echo "hello W!";
         //
-        // dd(1);
-        //return view('welcome');
     }
 
     /**
