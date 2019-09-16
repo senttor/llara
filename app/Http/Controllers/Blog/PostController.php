@@ -16,6 +16,11 @@ class   PostController extends BaseController
     public function index()
     {
         $items = BlogPost::all();
+      //  $items = BlogPost::withoutTrashed()->all(); показать с удаленными записями
+
+        //dd($items)   каждая статья это экземпляр класа БлогПост
+       // dd($items);//   dd($items[1] or    dd($items->first()););
+
         return view('blog.posts.index', compact('items'));
         // resources/views/blog/posts/index.blade.php
     }
