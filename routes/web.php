@@ -20,3 +20,7 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
 //http://xxxx.com/blog/posts  => resources/views/blog/posts/index.blade.php
 Route::resource('rest', 'RestTestController')->names('restTest');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
