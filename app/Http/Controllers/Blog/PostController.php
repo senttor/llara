@@ -16,36 +16,6 @@ class   PostController extends BaseController
     public function index()
     {
         $items = BlogPost::all();
-        dd($items[1]);
-        output:
-        BlogPost {#454 ▼
-        #connection: "mysql"
-        #table: "blog_posts"
-        #primaryKey: "id"
-        #keyType: "int"
-        +incrementing: true
-        #with: []
-        #withCount: []
-        #perPage: 15
-        +exists: true
-        +wasRecentlyCreated: false
-        #attributes: array:13 [▶]
-        #original: array:13 [▶]
-        #changes: []
-        #casts: []
-        #dates: []
-        #dateFormat: null
-        #appends: []
-        #dispatchesEvents: []
-        #observables: []
-        #relations: []
-        #touches: []
-        +timestamps: true
-  #hidden: []
-  #visible: []
-  #fillable: []
-  #guarded: array:1 [▶]
-
         return view('blog.posts.index', compact('items'));
         // resources/views/blog/posts/index.blade.php
     }
