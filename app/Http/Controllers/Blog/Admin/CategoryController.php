@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class  CategoryController extends Controller
+class  CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +16,14 @@ class  CategoryController extends Controller
     public function index()
     {
         //
+        // $xxx = BlogCategory::all();
+        $paginator = BlogCategory::paginate(5); // все єлементы из базы данных,
+        // на одну страницу по 5 елементов
+
+        //   dd($xxx, $paginator);
+
+        return view('blog.admin.category.index', compact('paginator'));
+
     }
 
     /**
