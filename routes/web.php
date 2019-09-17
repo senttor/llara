@@ -14,15 +14,32 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
     Route::resource('posts', 'PostController')->names('blog.posts');
 });
 //http://xxxx.com/blog/posts  => resources/views/blog/posts/index.blade.php
-Route::resource('rest', 'RestTestController')->names('restTest');
+//Route::resource('rest', 'RestTestController')->names('restTest');
 
 /*Route::resource('/cruds', 'CrudsController', [
     'except' => ['edit', 'show', 'store']
 ]);*/
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+//admin part
+
+$groupData = [
+    'namespace' => 'Blog\Admin',// locatiin for controller  (in the case)-> CategoryController
+    'prefix'    => 'admin/blog',
+];
+
+Route::group( $groupData, function () {
+ $methods = ['index', 'edit', 'update', 'create',   'store'];
+ Route::resource('categories', 'CategoryController')
+     ->only($methods) //white list of methods
+     ->names('blog.admin.categories');
+});
+
+
