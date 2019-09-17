@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Blog\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class  CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.

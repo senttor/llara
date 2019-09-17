@@ -32,14 +32,14 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
 
 $groupData = [
     'namespace' => 'Blog\Admin',// locatiin for controller  (in the case)-> CategoryController
-    'prefix'    => 'admin/blog',
+    'prefix' => 'admin/blog',
 ];
 
-Route::group( $groupData, function () {
- $methods = ['index', 'edit', 'update', 'create',   'store'];
- Route::resource('categories', 'CategoryController')
-     ->only($methods) //white list of methods
-     ->names('blog.admin.categories');
+Route::group($groupData, function () {
+    $methods = ['index', 'edit', 'update', 'create', 'store'];
+    Route::resource('categories', 'CategoryController')
+        ->only($methods) //white list of methods
+        ->names('blog.admin.categories');
 });
 
 
