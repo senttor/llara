@@ -1,5 +1,5 @@
 
-//admin/blog/categories/
+//
 @extends('layouts.app')
 
 @section('content')

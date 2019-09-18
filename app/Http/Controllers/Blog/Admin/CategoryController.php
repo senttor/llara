@@ -17,9 +17,9 @@ class  CategoryController extends BaseController
     {
         //
         // $xxx = BlogCategory::all();
-        $paginator = BlogCategory::paginate(5); // все єлементы из базы данных,
+        $paginator = BlogCategory::paginate(15); // все єлементы из базы данных,
         // на одну страницу по 5 елементов
-
+//dd($paginator);
         //   dd($xxx, $paginator);
 
         return view('blog.admin.category.index', compact('paginator'));
@@ -33,6 +33,7 @@ class  CategoryController extends BaseController
      */
     public function create()
     {
+
         //admin/blog/categories/create
     }
 
@@ -56,6 +57,7 @@ class  CategoryController extends BaseController
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -66,7 +68,10 @@ class  CategoryController extends BaseController
      */
     public function edit($id)
     {
+        $item = BlogCategory::findOrFail($id);//find  , findOrFail - если не найдет возврат 404., where('id', $id)->get() - колекция где ид = $id
         //
+        $categoryList = BlogCategory::all();
+        return view('blog.admin.category.edit', compact('item', 'categoryList'));
     }
 
     /**
@@ -79,6 +84,7 @@ class  CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         //
+        dd(__METHOD__, $request->all(), $id);
     }
 
     /**
