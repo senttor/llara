@@ -22,7 +22,7 @@ class  CategoryController extends BaseController
 //dd($paginator);
         //   dd($xxx, $paginator);
 
-        return view('blog.admin.category.index', compact('paginator'));
+        return view('blog.admin.categories.index', compact('paginator'));
 
     }
 
@@ -71,7 +71,7 @@ class  CategoryController extends BaseController
         $item = BlogCategory::findOrFail($id);//find  , findOrFail - если не найдет возврат 404., where('id', $id)->get() - колекция где ид = $id
         //
         $categoryList = BlogCategory::all();
-        return view('blog.admin.category.edit', compact('item', 'categoryList'));
+        return view('blog.admin.categories.edit', compact('item', 'categoryList'));
     }
 
     /**
@@ -83,8 +83,28 @@ class  CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
-        dd(__METHOD__, $request->all(), $id);
+        //save category     path ==> admin/blog/categories
+        //dd(__METHOD__, $request->all(), $id);
+        $item = BlogCategory::find($id);
+        if (empty($item)) {
+            return back()   // helper function redirect back - можно указать код ошибки
+                ->withErrors(['msg' => "Запись id=[{$id}] запись не найдена"])
+                ->withInput(); // вернуть то что пришло к нам
+                               //например данные введенные в форму
+        }
+        $data = $request->all();
+        $result = $item->fill($data)->save();
+
+        if ($result) {
+            return redirect()
+                ->route('blog.admin.categories.edit', $item->id)
+                ->with(['success' => 'success saved']);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'saving error'])
+                ->withInput();
+        }
+
     }
 
     /**
