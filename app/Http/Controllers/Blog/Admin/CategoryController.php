@@ -86,14 +86,19 @@ class  CategoryController extends BaseController
         //save category     path ==> admin/blog/categories
         //dd(__METHOD__, $request->all(), $id);
         $item = BlogCategory::find($id);
+       // dd($item);
+       // dd($item->description);
         if (empty($item)) {
             return back()   // helper function redirect back - можно указать код ошибки
                 ->withErrors(['msg' => "Запись id=[{$id}] запись не найдена"])
-                ->withInput(); // вернуть то что пришло к нам
+                 ->withInput(); // вернуть то что пришло к нам
                                //например данные введенные в форму
         }
         $data = $request->all();
-        $result = $item->fill($data)->save();
+       // dd($data);
+        $result = $item
+            ->fill($data) //обновляет свойства обьекта - сопоставление свойств с разрешенными в модели
+            ->save();  //запись в базу возращает boolean - удачно или нет
 
         if ($result) {
             return redirect()
