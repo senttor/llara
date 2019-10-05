@@ -13,7 +13,9 @@ class BlogCategoryUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        //return false;
+        //return auth->check();
+        return true;
     }
 
     /**
@@ -23,8 +25,11 @@ class BlogCategoryUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        return   [
+            'title'       => 'required|min:5|max:200',
+            'slug'        => 'max:200',
+            'discription' => 'string|max:500|min:3',
+            'parent_id'   => 'required|integer|exists:blog_categories,id',// в таблице blog_categories в id должно существовать
         ];
     }
 }

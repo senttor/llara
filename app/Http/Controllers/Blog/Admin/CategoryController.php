@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,15 +82,15 @@ class  CategoryController extends BaseController
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogCategoryUpdateRequest $request, $id) //ctrl + space - добавит namespace в шапку - use
     {
-        $rules = [
+       /* $rules = [
             'title'       => 'required|min:5|max:200',
             'slug'        => 'max:200',
             'discription' => 'string|max:500|min:3',
             'parent_id'   => 'required|integer|exists:blog_categories,id',// в таблице blog_categories в id должно существовать
-        ];
-        $validatedData = $this->validate($request, $rules); //1 способ валидации - к контроллеру
+        ];*/
+       // $validatedData = $this->validate($request, $rules); //1 способ валидации - к контроллеру
      //$validatedData = $request->validate($rules);//2 способ валидации - к реквесту
         //$validator = \Validator::make($request->all(). rules); //3 способ валидации
        // $validatedData [] =       //$validator->passes() // bool - прошел или нет
@@ -102,7 +103,7 @@ class  CategoryController extends BaseController
 //4 способ валидации
 
 
-        dd($validatedData);
+      //  dd($validatedData);
 
         //save category     path ==> admin/blog/categories
         //dd(__METHOD__, $request->all(), $id);
