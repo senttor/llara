@@ -54,10 +54,11 @@
                                 <textarea name="description"
                                           id="description"
                                           class="form-control"
-                                          rows="3">{{ old('description', $item->description) }}
+                                          rows="3">
+                                    {{ old('description ', $item->discription) }}
                                     @php
                                         //old какой ключи ищем в старом input, если не пришел
-                                    //то берем из базы $item->dыescription
+                                    //то берем из базы $item->description
                                     @endphp
                                 </textarea>
                             </div>
