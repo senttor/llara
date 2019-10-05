@@ -50,12 +50,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="description">Идетификатор</label>
-                                <textarea name="description"
-                                          id="description"
+                                <label for="discription">Идетификатор</label>
+                                <textarea name="discription"
+                                          id="discription"
                                           class="form-control"
                                           rows="3">
-                                    {{ old('description ', $item->discription) }}
+                                    {{ old('discription ', $item->discription) }}
                                     @php
                                         //old какой ключи ищем в старом input, если не пришел
                                     //то берем из базы $item->description

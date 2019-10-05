@@ -83,17 +83,38 @@ class  CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'title'       => 'required|min:5|max:200',
+            'slug'        => 'max:200',
+            'discription' => 'string|max:500|min:3',
+            'parent_id'   => 'required|integer|exists:blog_categories,id',// в таблице blog_categories в id должно существовать
+        ];
+        $validatedData = $this->validate($request, $rules); //1 способ валидации - к контроллеру
+     //$validatedData = $request->validate($rules);//2 способ валидации - к реквесту
+        //$validator = \Validator::make($request->all(). rules); //3 способ валидации
+       // $validatedData [] =       //$validator->passes() // bool - прошел или нет
+                                    //$validator->validate()
+                                    //$validator->valid()
+                                    //$validator->failed()
+                                    //$validator->errors()
+                                    //$validator->fails()
+        //можно создавать свои собственные правила
+//4 способ валидации
+
+
+        dd($validatedData);
+
         //save category     path ==> admin/blog/categories
         //dd(__METHOD__, $request->all(), $id);
         $item = BlogCategory::find($id);
         if (empty($item)) {
             return back()   // helper function redirect back - можно указать код ошибки
-                ->withErrors(['msg' => "Запись id=[{$id}] запись не найдена"])
-                 ->withInput(); // вернуть то что пришло к нам
-                               //например данные введенные в форму
+            ->withErrors(['msg' => "Запись id=[{$id}] запись не найдена"])
+                ->withInput(); // вернуть то что пришло к нам
+            //например данные введенные в форму
         }
         $data = $request->all();
-       // dd($data);
+        //dd($data);
         $result = $item
             ->fill($data) //обновляет свойства обьекта - сопоставление свойств с разрешенными в модели
             ->save();  //запись в базу возращает boolean - удачно или нет
