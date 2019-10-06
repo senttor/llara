@@ -9,8 +9,25 @@ use App\Repositories\BlogCategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * Управление категориями блога
+ * Class CategoryController
+ * @package App\Http\Controllers\Blog\Admin
+ */
 class  CategoryController extends BaseController
 {
+    /**
+     * @var BlogCategoryRepository
+     */
+
+    private $blogCategoryRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,10 +37,11 @@ class  CategoryController extends BaseController
     {
         //
         // $xxx = BlogCategory::all();
-        $paginator = BlogCategory::paginate(15); // все єлементы из базы данных,
+ //       $paginator = BlogCategory::paginate(15); // все єлементы из базы данных,
         // на одну страницу по 5 елементов
 //dd($paginator);
         //   dd($xxx, $paginator);
+       $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
 
         return view('blog.admin.categories.index', compact('paginator'));
 
@@ -37,7 +55,8 @@ class  CategoryController extends BaseController
     public function create()
     {
         $item = new BlogCategory();
-        $categoryList = BlogCategory::all();
+       // $categoryList = BlogCategory::all();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
         return view('blog.admin.categories.edit',
             compact('item', 'categoryList')
         );
