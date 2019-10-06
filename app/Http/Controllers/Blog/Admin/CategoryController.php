@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
@@ -49,16 +50,17 @@ class  CategoryController extends BaseController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogCategoryCreateRequest  $request)
     {
         $data = $request->input();
+        //eсли заголовок не пришел из формы добавляем транслит тайтл
         if (empty($data['slug'])) {
             $data['slug'] = str_slug($data['title']);
         }
 
-        $item = new BlogCategory($data);
-        dd($item);
-        $item->save();
+       /* $item = new BlogCategory($data);
+        $item->save(); //1 save*/
+        $item = (new BlogCategory())->create($data);//2 save
 
         if ($item) {
             return redirect()->route('blog.admin.categories.edit', [$item->id])
@@ -135,10 +137,14 @@ class  CategoryController extends BaseController
             //например данные введенные в форму
         }
         $data = $request->all();
+        if (empty($data['slug'])) {
+            $data['slug'] = str_slug($data['title']);
+        }
         //dd($data);
         $result = $item
             ->fill($data) //обновляет свойства обьекта - сопоставление свойств с разрешенными в модели
             ->save();  //запись в базу возращает boolean - удачно или нет
+          //or $result = $item->update($data);
 
         if ($result) {
             // выполнить ридирект
