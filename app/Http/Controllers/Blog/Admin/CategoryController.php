@@ -34,6 +34,11 @@ class  CategoryController extends BaseController
      */
     public function create()
     {
+        $item = new BlogCategory();
+        $categoryList = BlogCategory::all();
+        return view('blog.admin.categories.edit',
+            compact('item', 'categoryList')
+        );
 
         //admin/blog/categories/create
     }
@@ -46,7 +51,22 @@ class  CategoryController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->input();
+        if (empty($data['slug'])) {
+            $data['slug'] = str_slug($data['title']);
+        }
+
+        $item = new BlogCategory($data);
+        dd($item);
+        $item->save();
+
+        if ($item) {
+            return redirect()->route('blog.admin.categories.edit', [$item->id])
+                ->with(['success' => 'success saved']);
+        } else {
+            return back()->withErrors(['msg' => 'Saving errors'])
+                ->withInput();
+        }
     }
 
     /**
@@ -84,26 +104,26 @@ class  CategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, $id) //ctrl + space - добавит namespace в шапку - use
     {
-       /* $rules = [
-            'title'       => 'required|min:5|max:200',
-            'slug'        => 'max:200',
-            'discription' => 'string|max:500|min:3',
-            'parent_id'   => 'required|integer|exists:blog_categories,id',// в таблице blog_categories в id должно существовать
-        ];*/
-       // $validatedData = $this->validate($request, $rules); //1 способ валидации - к контроллеру
-     //$validatedData = $request->validate($rules);//2 способ валидации - к реквесту
+        /* $rules = [
+             'title'       => 'required|min:5|max:200',
+             'slug'        => 'max:200',
+             'discription' => 'string|max:500|min:3',
+             'parent_id'   => 'required|integer|exists:blog_categories,id',// в таблице blog_categories в id должно существовать
+         ];*/
+        // $validatedData = $this->validate($request, $rules); //1 способ валидации - к контроллеру
+        //$validatedData = $request->validate($rules);//2 способ валидации - к реквесту
         //$validator = \Validator::make($request->all(). rules); //3 способ валидации
-       // $validatedData [] =       //$validator->passes() // bool - прошел или нет
-                                    //$validator->validate()
-                                    //$validator->valid()
-                                    //$validator->failed()
-                                    //$validator->errors()
-                                    //$validator->fails()
+        // $validatedData [] =       //$validator->passes() // bool - прошел или нет
+        //$validator->validate()
+        //$validator->valid()
+        //$validator->failed()
+        //$validator->errors()
+        //$validator->fails()
         //можно создавать свои собственные правила
 //4 способ валидации
 
 
-      //  dd($validatedData);
+        //  dd($validatedData);
 
         //save category     path ==> admin/blog/categories
         //dd(__METHOD__, $request->all(), $id);
