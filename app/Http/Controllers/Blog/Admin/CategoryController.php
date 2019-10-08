@@ -80,6 +80,7 @@ class  CategoryController extends BaseController
 
        /* $item = new BlogCategory($data);
         $item->save(); //1 save*/
+       //Создаст обьект и добавит в БД
         $item = (new BlogCategory())->create($data);//2 save
 
         if ($item) {
@@ -113,13 +114,14 @@ class  CategoryController extends BaseController
     {
        // $item = BlogCategory::findOrFail($id);//find  , findOrFail - если не найдет возврат 404., where('id', $id)->get() - колекция где ид = $id
         //  $categoryList = BlogCategory::all();
-        $item = $categoryRepository->getEdit($id);
+     //   $item = $categoryRepository->getEdit($id);
+        $item = $this->blogCategoryRepository->getEdit($id);
         //рполучаем обьекты для выпадающего списка
         if (empty($item)) {
             abort(404);
         }
-        $categoryList = $categoryRepository->getForComboBox();
-
+       // $categoryList = $categoryRepository->getForComboBox();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
         return view('blog.admin.categories.edit', compact('item', 'categoryList'));
     }
 
@@ -155,7 +157,8 @@ class  CategoryController extends BaseController
 
         //save category     path ==> admin/blog/categories
         //dd(__METHOD__, $request->all(), $id);
-        $item = BlogCategory::find($id);
+      //  $item = BlogCategory::find($id);
+        $item = $this->blogCategoryRepository->getEdit($id);
         if (empty($item)) {
             return back()   // helper function redirect back - можно указать код ошибки
             ->withErrors(['msg' => "Запись id=[{$id}] запись не найдена"])

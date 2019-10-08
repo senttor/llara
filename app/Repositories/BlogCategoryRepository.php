@@ -37,24 +37,24 @@ class BlogCategoryRepository extends CoreRepository
      */
     public function getForComboBox()
     {
-       // return $this->startConditions()->all();
         $columns = implode(', ', [
            'id',
            'CONCAT (id, ". ", title) AS id_title',
         ]);
 
-        $result[] = $this->startConditions()->all();
+        /*$result[] = $this->startConditions()->all();
         $result[] = $this
             ->startConditions()
-            ->select('blog_categorie.*',
+            ->select('blog_categories.*',
                 \DB::raw('CONCAT (id, ". ", title) AS id_title'))
             ->toBase() // основные данные- не все обьекты, std class, данные в виде класа, а не массива
-            ->get();
-        $result[] = $this
+            ->get();*/
+        $result = $this
             ->startConditions()
             ->selectRaw($columns)
             ->toBase()
             ->get();
+       // dd($result);
         return  $result;
     }
 
