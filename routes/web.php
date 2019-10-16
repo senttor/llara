@@ -40,6 +40,12 @@ Route::group($groupData, function () {
     Route::resource('categories', 'CategoryController')
         ->only($methods) //white list of methods
         ->names('blog.admin.categories');
+
+        //BlogPost
+    Route::resource('posts', 'PostController')
+        ->except(['show'])
+        ->names('blog.admin.posts');
+
 });
 
 
