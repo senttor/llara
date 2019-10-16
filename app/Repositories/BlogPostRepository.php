@@ -39,6 +39,17 @@ class BlogPostRepository extends CoreRepository
         $result = $this->startConditions() //создается новый экземпляр класс App\Models\BlogPost as Model
             ->select($columns)
             ->orderBy('id', 'DESC')
+            //->with(['category', 'user']) //жадная загрузка - существенно уменьшает кол-во запросов
+            //загрузить отношение - что бы потом можно было с ним работать
+                //подгружаем полностью
+                ->with([
+                    //this
+                    'category' => function($query) {
+                    $query->select(['id','title']);
+                    },
+                //or
+                'user:id,name',
+            ])
             ->paginate(25);
         return $result;
     }
