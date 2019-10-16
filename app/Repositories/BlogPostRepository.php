@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Models\BlogPost as Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class BlogPostRepositories
@@ -19,5 +20,26 @@ class BlogPostRepository extends CoreRepository
     protected function getModelClass()
     {
         return Model::class;
+    }
+    /**
+     * Получить список статей для вывода в списке -админки
+     * @return LengthAwarePaginator
+     */
+    public function getAllWithPaginate()
+    {
+        $columns = [
+          'id',
+          'title',
+          'slug',
+          'is_published',
+          'published_at',
+          'user_id',
+          'category_id'
+        ];
+        $result = $this->startConditions() //создается новый экземпляр класс App\Models\BlogPost as Model
+            ->select($columns)
+            ->orderBy('id', 'DESC')
+            ->paginate(25);
+        return $result;
     }
 }

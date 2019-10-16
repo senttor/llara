@@ -38,8 +38,8 @@ class BlogCategoryRepository extends CoreRepository
     public function getForComboBox()
     {
         $columns = implode(', ', [
-           'id',
-           'CONCAT (id, ". ", title) AS id_title',
+            'id',
+            'CONCAT (id, ". ", title) AS id_title',
         ]);
 
         /*$result[] = $this->startConditions()->all();
@@ -54,8 +54,8 @@ class BlogCategoryRepository extends CoreRepository
             ->selectRaw($columns)
             ->toBase()
             ->get();
-       // dd($result);
-        return  $result;
+        // dd($result);
+        return $result;
     }
 
     public function getAllWithPaginate($perPage = null)
