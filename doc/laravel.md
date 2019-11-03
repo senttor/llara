@@ -6,6 +6,9 @@
  **свой request**
 ```php
 php artisan make:request BlogCategoryUpdateRequest
+
+php artisan make:request BlogPostUpdateRequest
+
 ```
  
   ---

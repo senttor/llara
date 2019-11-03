@@ -48,8 +48,8 @@
                             <label for="category_id">Категория</label>
                             <select name="category_id"
                                     id="category_id"
-                                    class="form-control"
-                                    placeholder="Выберете категорию"
+                                    class="form-control form-control-lg"
+                                 {{--   placeholder="Выберете категорию"--}}
                                     required>
                                 @foreach($categoryList as $categoryOption)
                                     <option value="{{ $categoryOption->id }}"
@@ -83,7 +83,7 @@
                             <input name="is_published"
                                    type="checkbox"
                                    class="form-check-input"
-                                   value="{{ $item->is_published }}"
+                                   value="1"
                                    @if($item->is_published )
                                    checked="checked"
                                     @endif
