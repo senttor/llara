@@ -48,7 +48,7 @@
                             <label for="category_id">Категория</label>
                             <select name="category_id"
                                     id="category_id"
-                                    class="form-control form-control-lg"
+                                    class="form-control form-control-lg "
                                  {{--   placeholder="Выберете категорию"--}}
                                     required>
                                 @foreach($categoryList as $categoryOption)

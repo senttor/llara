@@ -1,3 +1,29 @@
+
+
+
+Observers - Наблюдатели
+
+```php
+php artisan make:observer BlogPostObserver --model=Models/BlogPost
+
+php artisan make:observer BlogCategoryObserver --model=Models/BlogCategory
+
+```
+
+
+собщить о том что данные классы будут слидить за событиями модели
+
+добавляем след строки:
+```php
+app/Providers/AppServiceProvider.php >>  boot() method
+
++   BlogPost::observe(BlogPostObserver::class);
++   BlogCategory::observe(BlogCategoryObserver::class);
+
+```
+
+ 
+ ---
  
  **relationship**
  
