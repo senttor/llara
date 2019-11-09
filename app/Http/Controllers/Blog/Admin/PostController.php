@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BlogPostCreateRequest;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
-use Illuminate\Http\Request;
 use App\Repositories\BlogPostRepository;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
+//use Illuminate\Http\Request;
+//use Illuminate\Support\Carbon;
+//use Illuminate\Support\Str;
 
 
 class PostController extends BaseController
@@ -53,18 +55,35 @@ class PostController extends BaseController
      */
     public function create()
     {
-        //
+        $item = new BlogPost();
+        $categoryList
+            = $this->blogCategoryRepository->getForComboBox();
+        return view('blog.admin.posts.edit',
+        compact('item','categoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param BlogPostCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogPostCreateRequest $request)
     {
-        //
+        $data = $request->input();
+        $item = (new BlogPost())->create($data);
+
+        //$categoryList = $this->blogCategoryRepository->getForComboBox();
+        //return  view('blog.admin.posts.edit', compact('item', 'categoryList'));
+
+        if ($item) {
+            return redirect()->route('blog.admin.posts.edit', [$item->id])
+                ->with(['success' => 'Success saved']);//with flash message
+        } else {
+            return back()->withErrors(['msg' =>'save error'])
+                ->withInput();
+        }
+
     }
 
     /**

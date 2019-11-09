@@ -5,7 +5,10 @@
            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                <span aria-hidden="true">x</span>
            </button>
-           {{ $errors->first() }}
+     {{--$errors->first() первая ошибка валидатора--}}
+           @foreach($errors->all() as $errorTxt)
+               <li>{{ $errorTxt }}</li>
+           @endforeach
        </div>
     </div>
 </div>

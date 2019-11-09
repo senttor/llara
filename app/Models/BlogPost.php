@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BlogPost extends Model
 {
     use SoftDeletes; // подключили трейт
+
+    const UNKNOWN_USER = 1;
     //тоесть показать без удаленных
     //запрос изменился на select * from `blog_posts` where `blog_posts`.`deleted_at` is null -- добавилось where
 
@@ -41,7 +43,7 @@ class BlogPost extends Model
             'content_raw',
             'is_published',
             'published_at',
-            'user_id',
+            //'user_id',
         ];
 
     /**
