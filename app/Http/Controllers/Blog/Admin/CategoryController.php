@@ -74,9 +74,11 @@ class  CategoryController extends BaseController
     {
         $data = $request->input();
         //eсли заголовок не пришел из формы добавляем транслит тайтл
-        if (empty($data['slug'])) {
+
+        //перенсено в обсервер
+      /*  if (empty($data['slug'])) {
             $data['slug'] = str_slug($data['title']);
-        }
+        }*/
 
        /* $item = new BlogCategory($data);
         $item->save(); //1 save*/
@@ -128,7 +130,7 @@ class  CategoryController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param BlogCategoryUpdateRequest $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */
@@ -166,9 +168,10 @@ class  CategoryController extends BaseController
             //например данные введенные в форму
         }
         $data = $request->all();
-        if (empty($data['slug'])) {
+        //перенесено в обсервер
+     /*   if (empty($data['slug'])) {
             $data['slug'] = str_slug($data['title']);
-        }
+        }*/
         //dd($data);
         $result = $item
             ->fill($data) //обновляет свойства обьекта - сопоставление свойств с разрешенными в модели
