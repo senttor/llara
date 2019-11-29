@@ -1,6 +1,12 @@
 
+Accessors
+ 
+> public function getParentTitleAttribute()
 
+методы преобразовывающие данные полученные из бд  
 
+ ---
+ 
 Observers - Наблюдатели
 
 ```php

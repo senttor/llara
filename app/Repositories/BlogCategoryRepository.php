@@ -64,6 +64,8 @@ class BlogCategoryRepository extends CoreRepository
         $result = $this
             ->startConditions()
             ->select($columns)
+            ->with(['parentCategory:id,title']) // для relation parentCategory  подгрузить поля -id & title - уменьшить количество запросов
+                                                //admin/blog/categories?page=1
             ->paginate($perPage);
 
         return $result;
