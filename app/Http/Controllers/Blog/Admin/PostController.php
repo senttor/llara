@@ -7,6 +7,7 @@ use App\Http\Requests\BlogPostUpdateRequest;
 use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
+
 //use Illuminate\Http\Request;
 //use Illuminate\Support\Carbon;
 //use Illuminate\Support\Str;
@@ -59,7 +60,7 @@ class PostController extends BaseController
         $categoryList
             = $this->blogCategoryRepository->getForComboBox();
         return view('blog.admin.posts.edit',
-        compact('item','categoryList'));
+            compact('item', 'categoryList'));
     }
 
     /**
@@ -80,7 +81,7 @@ class PostController extends BaseController
             return redirect()->route('blog.admin.posts.edit', [$item->id])
                 ->with(['success' => 'Success saved']);//with flash message
         } else {
-            return back()->withErrors(['msg' =>'save error'])
+            return back()->withErrors(['msg' => 'save error'])
                 ->withInput();
         }
 
@@ -136,12 +137,12 @@ class PostController extends BaseController
         $data = $request->all();
 //перенесено в laravel/app/Observers/BlogPostObserver.php
 
-     /*if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
-        if (empty($item->published_at) && $data['is_published']) {
-            $data['published_at'] = Carbon::now();
-        }*/
+        /*if (empty($data['slug'])) {
+               $data['slug'] = Str::slug($data['title']);
+           }
+           if (empty($item->published_at) && $data['is_published']) {
+               $data['published_at'] = Carbon::now();
+           }*/
 //обновляем данные
         $result = $item->update($data);
 
@@ -164,6 +165,18 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $result = BlogPost::destroy($id); //soft delete
+        //Observers/BlogPostObserver.php   в метод deleting попадаем
+        //  $result = false;
+        //  $result = BlogPost::find($id)->forceDelete();// полное удаление из базы
+
+        if ($result) {
+            return redirect()
+                ->route('blog.admin.posts.index')
+                ->with(['success' => "Запись id[$id] удалена"]);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка удаления']);
+        }
+
     }
 }
