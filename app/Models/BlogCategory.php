@@ -68,4 +68,29 @@ class BlogCategory extends Model
     {
         return $this->id === BlogCategory::ROOT;
     }
+
+    /**
+     * @param string $valueFromDB
+     *
+     * @return bool/mixed/null/string/string[]
+     *
+     * Пример Аксесора
+     * применяется при $item->title
+     */
+    public function getTitleAttribute($valueFromObject)
+    {
+        return mb_strtoupper($valueFromObject);
+    }
+
+    /**
+     * @param string $incomingValue
+     *
+     * Muttator example
+     *
+     * $item->title = 'some value' применится при сохранении
+     */
+    public function setTitleAttribute($incomingValue)
+    {
+        $this->attributes['title'] = mb_strtolower($incomingValue);
+    }
 }

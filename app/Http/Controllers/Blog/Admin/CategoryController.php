@@ -118,6 +118,20 @@ class  CategoryController extends BaseController
         //  $categoryList = BlogCategory::all();
      //   $item = $categoryRepository->getEdit($id);
         $item = $this->blogCategoryRepository->getEdit($id);
+
+      /*  $v['title_before'] = $item->title;
+        $item->title = 'some string ValUe 11';
+
+        $v['title_after'] = $item->title;
+        $v['getAttribute'] = $item->getAttribute('title');//все атрибуты
+        $v['attributesToArray'] = $item->attributesToArray();
+        $v['attributes'] = $item->attributes['title'];
+        $v['getAttributeValue'] = $item->getAttributeValue('title');
+        $v['getMutatedAttributes'] = $item->getMutatedAttributes(); // все поля для которых есть мутаторы
+        $v['hasGetMutator'] = $item->hasGetMutator('title');  //есть ли мутатор для поля title
+       dd($v, $item);*/
+
+
         //рполучаем обьекты для выпадающего списка
         if (empty($item)) {
             abort(404);

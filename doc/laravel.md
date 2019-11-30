@@ -1,4 +1,28 @@
+ Мутаторы
+ 
+ ```php
+class User extends Model
 
+ public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = strtolower($value);
+    }
+```
+ 
+ ---
+ 
+ > protected $casts  
+ 
+ преобразовывают(приводят данные столбцов таблицы к требуемому формату)
+
+ ```php
+protected $casts = [
+    'options' => 'array',
+  ];
+```
+ 
+ ---
+ 
 Accessors
  
 > public function getParentTitleAttribute()
