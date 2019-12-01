@@ -1,3 +1,16 @@
+
+
+
+
+
+ Создаем DiggingDeeperController
+ 
+ ```php
+php artisan make:controller  DiggingDeeperController
+```
+ 
+ ---
+ 
  Мутаторы
  
  ```php
